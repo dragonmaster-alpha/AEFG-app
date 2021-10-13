@@ -1,0 +1,97 @@
+<ion-menu [content]="content" class="leftMenu">
+  
+  <ion-content  class="menuBackground">
+
+            
+            
+            <div padding>
+	                <ion-title><img src="assets/imgs/logo_affg.png" width="250px" class="logo" alt=""></ion-title>
+
+            </div>
+	            
+            
+             
+             
+          <ion-list margin-top>
+          
+          <ion-item class="item-stable" color="light" (click)="openPage('home')" menuClose>
+				<ion-label class="menu_item" >Home</ion-label>
+			</ion-item>
+          
+	        <div *ngFor="let p of global.menuItems">
+		        <div *ngIf="p.titulo!='BOTTOM MENU'">
+	          <ion-item class="item-stable" color="light"
+	                    (click)="toggleGroup(p)"
+	                    [ngClass]="{active: isGroupShown(p)}">{{ p.titulo }}
+	                    <ion-icon *ngIf="isGroupShown(p)" name='ios-arrow-up' item-end color="light"></ion-icon>
+	                    <ion-icon *ngIf="!isGroupShown(p)" name='ios-arrow-down' item-end color="light"></ion-icon>
+	            
+	          </ion-item>
+	          <div *ngIf="isGroupShown(p)">
+	          <ion-item class="item-accordion"
+	                    *ngFor="let items of p.items"
+	                     (click)="openPage(items.plantilla,items.id, items.slug)" menuClose>
+<ion-label class="menu_item" >{{ items.titulo }}</ion-label><!--<ion-icon name='ios-arrow-forward' item-end color="light"></ion-icon>-->	          </ion-item>
+	          </div>
+	          </div>
+	        </div>
+	        
+	        <ion-item class="item-stable" color="light" (click)="openPage('myflights')" menuClose>
+				<ion-label class="menu_item" >My Flights</ion-label>
+			</ion-item>
+			
+			<!--<ion-item class="item-stable" color="light" (click)="openPage('login')" menuClose>
+				<ion-label class="menu_item" >Login</ion-label>
+			</ion-item>-->
+			
+			<!-- Esta es la parte de los challenges, habrá que ver si se quita -->
+			<!--<ion-item class="item-stable" color="light" (click)="openPage('profile')" menuClose>
+				<ion-label class="menu_item" >Profile</ion-label>
+			</ion-item>-->
+			<!--<ion-item class="item-stable" color="light" (click)="openPage('challenges')" menuClose>
+				<ion-label class="menu_item" >Challenges</ion-label>
+			</ion-item>-->
+			<!--<ion-item class="item-stable" color="light" (click)="openPage('alerts')" menuClose>
+				<ion-label class="menu_item" >Alerts</ion-label>
+				<ion-badge item-end color="warning">55</ion-badge>
+			</ion-item>-->
+			<!--<ion-item class="item-stable" color="light" (click)="openPage('myteams')" menuClose>
+				<ion-label class="menu_item" >My Teams</ion-label>
+			</ion-item>
+			<ion-item class="item-stable" color="light" (click)="openPage('dashboard')" menuClose>
+				<ion-label class="menu_item" >Dashboard</ion-label>
+			</ion-item>
+			<ion-item class="item-stable" color="light" (click)="openPage('newteam')" menuClose>
+				<ion-label class="menu_item" >New Team</ion-label>
+			</ion-item>
+			<ion-item class="item-stable" color="light" (click)="openPage('intro-challenges')" menuClose>
+				<ion-label class="menu_item" >Intro Challenges</ion-label>
+			</ion-item>-->
+			
+	        
+	      </ion-list>   
+	      
+	      
+	      
+	      
+        <!--     <button margin-top class="menuButton" ion-button color="menuButton" menuClose (click)="changeLanguage('en')" round block>ingles</button>
+            
+    
+    <button margin-top class="menuButton" ion-button color="menuButton" menuClose (click)="closeTournament()" round block>Salir del Torneo</button>
+    <button margin-top class="menuButton" ion-button color="menuButton" menuClose (click)="openPage('static','about-app')" round block>about the app</button>-->
+    <p ion-text color="light" text-center>v 0.0.7</p>
+  </ion-content>
+
+  <ion-footer text-center>
+        <button ion-button round color="white" menuClose="leftMenu" (click)="logout()" style="min-width: 80%">
+            <ion-icon item-left name="power"></ion-icon>&nbsp;Log Out
+        </button>
+
+
+    </ion-footer>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
